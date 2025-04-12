@@ -1,4 +1,79 @@
 This file is dedicated to the process of solving SQL challenges from the Leetcode. 
 
 1. 1757. Recyclable and Low Fat Products 
+Task: product_id is the primary key (column with unique values) for this table.
+low_fats is an ENUM (category) of type ('Y', 'N') where 'Y' means this product is low fat and 'N' means it is not.
+recyclable is an ENUM (category) of types ('Y', 'N') where 'Y' means this product is recyclable and 'N' means it is not.
 
+- Write a solution to find the ids of products that are both low fat and recyclable.
+
+
+CODE : 
+
+1sr trial : 
+
+SELECT
+  product_id
+FROM Products
+WHERE low_fats = "Y" AND 
+WHERE recyclable = "Y";
+______________________________---
+
+2nd with Correction :
+
+SELECT
+  product_id
+FROM Products
+WHERE low_fats = "Y" AND recyclable = "Y";
+_______________________________-
+
+Thoughts and Understanding of the exercise : 
+
+In the 1st trial I used 2 WHERE clause like I confused again it with CASE WHEN conditioning 
+where we repeat that code CASE WHEN, but it seems that when you use WHERE clause it is only possible 
+to use one time, and further set your condition. That's it. 
+
+
+
+
+2. 584. Find Customer Referee
+
+In SQL, id is the primary key column for this table.
+Each row of this table indicates the id of a customer, their name, and the id of the customer who referred them.
+
+Find the names of the customer that are not referred by the customer with id = 2.
+______________
+
+Trials that did not work:
+
+SELECT name
+FROM Customer
+WHERE referee_id !=2 
+____________________
+SELECT name
+FROM Customer
+WHERE referee_id <> 2 ;
+________________
+
+SELECT name
+FROM Customer
+WHERE referee_id <> 2 ;
+______________________________________________
+
+Correct Solution : 
+
+SELECT name
+FROM Customer
+WHERE referee_id !=2 OR referee_id IS NULL;
+____________________
+
+THOUGHTS : 
+
+As I see it is super important to be attentive to every detail of the challenge. The intuitive part of this exercise 
+was that, correctly I used the (SELECT statement) and I was a bit confused with the filtering part with the WHERE clause,
+at the beginning I was thinking let's use the = (equal operator) like setting the conditon to match to NULL and 1 . But asked
+CHAT GPT how can I filter in SQL for example, I did not say give me the answer, but learned from other examples, how can 
+we filter the where clause, for example , let say we dont want to include a particular value, we can simply like use the sign
+!= (exclamation mark and equa) or <>  (greater or less) sign to exclude the value. It was true that way. But imagine, in that particular
+column we have also NULL values. we need to use the logical operator (OR) and write the column name and write (IS NULL). To filter
+we are saying exclude 2 and include all and null values also. That's it. 
