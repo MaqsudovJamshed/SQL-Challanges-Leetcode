@@ -41,7 +41,7 @@ to use one time, and further set your condition. That's it.
 In SQL, id is the primary key column for this table.
 Each row of this table indicates the id of a customer, their name, and the id of the customer who referred them.
 
-Find the names of the customer that are not referred by the customer with id = 2.
+Task:Find the names of the customer that are not referred by the customer with id = 2.
 ______________
 
 Trials that did not work:
@@ -77,3 +77,53 @@ we filter the where clause, for example , let say we dont want to include a part
 != (exclamation mark and equa) or <>  (greater or less) sign to exclude the value. It was true that way. But imagine, in that particular
 column we have also NULL values. we need to use the logical operator (OR) and write the column name and write (IS NULL). To filter
 we are saying exclude 2 and include all and null values also. That's it. 
+
+
+
+
+3. 595. Big Countries
+
+Challenge : 
+
+A country is big if:
+
+it has an area of at least three million (i.e., 3000000 km2), or
+it has a population of at least twenty-five million (i.e., 25000000).
+Write a solution to find the name, population, and area of the big countries.
+
+
+Trials :
+_______________
+SELECT
+    name,
+    population,
+    area
+FROM World
+WHERE area =>3000000 AND population => 25000000;
+
+________________________________________________________
+Final solution: 
+
+SELECT
+    name,
+    population,
+    area
+FROM World
+WHERE area >=3000000 OR population >= 25000000;
+_________________________________
+
+Thoughts: 
+It took me not very long it complete the exercise, I put everything correctly just forgot the order of logical operators, in this case when we look for any value at least in
+the challenge  we have to put first the greater operator (>) then the equal(=) operator always this is the correct syntax. And the second thing was to be attantive what the exercise
+asks to do. I used the AND logical operator instead of OR. When I looked at the exercise again I realized I need to use the OR logical operator. Thats it. 
+
+
+
+
+
+
+
+
+
+
+
