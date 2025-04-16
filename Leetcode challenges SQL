@@ -5,7 +5,7 @@ This file is dedicated to the process of solving SQL challenges from the Leetcod
 
 
 
-
+        ** SELECT** 
 
 
 1. 1757. Recyclable and Low Fat Products 
@@ -194,14 +194,69 @@ by saying that return it only once and don't repeat it. Then we filter the autho
 
 
 
+
+
 5. 1683. Invalid Tweets
 
 tweet_id is the primary key (column with unique values) for this table. content consists of alphanumeric 
 characters, '!', or ' ' and no other special characters. This table contains all the tweets in a social media app.
 
 
-TASK: Write a solution to find the IDs of the invalid tweets. The tweet is invalid if the number of characters used 
-in the content of the tweet is strictly greater than 15. Return the result table in any order.
+TASK: 
+
+1. Write a solution to find the IDs of the invalid tweets. 
+2.The tweet is invalid if the number of characters used in the content of the tweet is strictly greater than 15. 
+3.Return the result table in any order.
+
+Input: 
+
+| tweet_id | content                           |
+| -------- | --------------------------------- |
+| 1        | Let us Code                       |
+| 2        | More than fifteen chars are here! |
+
+
+Trials:
+____________
+
+SELECT tweet_id
+FROM Tweets
+WHERE tweet_id = 2;
+
+-------/ /--------
+
+SELECT tweet_id
+FROM Tweets
+WHERE LENGTH (tweet_id) >15;
+
+__________
+SOLUTION:
+
+SELECT tweet_id
+FROM Tweets
+WHERE LENGTH (content) >15;
+
+
+_______________
+LEARNING PROCESS:
+
+With my trial code it was like drifting around and coding intuitivly like normally I do . However, if we pay 
+attantion to the question closely it says the column is invalid if nb of characters is greater than 15. So what I can try now is ask
+CHATGPT how do we filter with WHERE clause the nb of characters within column. Since I checked the answer is in any columns, we can count the
+number of values in the column like any characters with the LENGTH(column_name) function. I wrote the code and run the excercise. But it still
+showed an error then I though what was the issue. It seemed that I checked the wrong column , I had to check the content column. When doing
+that I got the correct answer. Great job. 
+
+
+
+
+
+
+
+
+
+
+6. 
 
 
 
