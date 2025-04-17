@@ -307,14 +307,148 @@ LEFT JOIN EmployeeUNI
     ON Employees.id = EmployeeUNI.id
 AND Employees.id = EmployeeUNI.unique_id;
 
+
+
+SOLUTION:
+
+SELECT EmployeeUNI.unique_id, Employees.name
+FROM Employees
+LEFT JOIN EmployeeUNI
+ON Employees.id = EmployeeUNI.id;
+
+
+LEARNING PROCESS:
+
+So this is only the draft of the join I am trying to do. Since we do the join on two columns, we also need to include
+the second column  with the AND operator. Since I tried with the AND operator it did not work. Then I tried different 
+option and it worked as usual we work with the joins , basically we joined the tables on ID and showed unique_id column,
+and the name of the table. It was not complicated but I made it a bit complicated . Anyway resolved the question. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+7. 1068. Product Sales Analysis I 
++-------------+-------+
+| Column Name | Type  |
++-------------+-------+
+| sale_id     | int   |
+| product_id  | int   |
+| year        | int   |
+| quantity    | int   |
+| price       | int   |
++-------------+-------+
+(sale_id, year) is the primary key (combination of columns with unique values) of this table.
+product_id is a foreign key (reference column) to Product table.
+Each row of this table shows a sale on the product product_id in a certain year.
+Note that the price is per unit.
+
++--------------+---------+
+| Column Name  | Type    |
++--------------+---------+
+| product_id   | int     |
+| product_name | varchar |
++--------------+---------+
+product_id is the primary key (column with unique values) of this table.
+Each row of this table indicates the product name of each product.
+ 
+
+Write a solution to report the product_name, year, and price for each sale_id in the Sales table.
+
+Return the resulting table in any order.
+
+
+TRIALS:
+
+SOLUTION:
+
+SELECT Product.product_name, Sales.year, Sales.price
+FROM Sales
+LEFT JOIN Product
+ON Sales.product_id = Product.product_id; 
+
+LEARNING PROCESS:
+
+In this SQL code, I solved the challegne in the first trial without any mistakes. It's interesting to see this development. Seemed very basic. 
+We had Sales and Product tables joined on the product_id, since it was the primary key for both tables. If I am not mistaken, we join tables
+on primary keys since they return the unique values for of the table and will not repeat the values. The good part is I resolved the code
+easily, but it is super important to understand why it works the way it does. We joined basically the product table with the Sales table. In this code Sales 
+table is our main table, meaning the primary key in this code is Sales product_id and the Product table product_id would be our foreign key,
+Why? Because our main table is SALES, we determine the main table when we use the table next to the FROM clause, when we use next to the JOIN 
+clause, the table it  would be our secondary. Also it is important to see the relationship. For example, what we want to show as a column. We
+are showing the product name, sales_year, and sales_price. It implies  that the relationship between tables is one-to-many, meaning the name of
+the product is related to many columns in the Sales table, such as Year and Price. 
+
+
+
+
+
+
+
+
+
+
+
+8. 1581. Customer Who Visited but Did Not Make Any Transactions
+Table: Visits
+
++-------------+---------+
+| Column Name | Type    |
++-------------+---------+
+| visit_id    | int     |
+| customer_id | int     |
++-------------+---------+
+visit_id is the column with unique values for this table.
+This table contains information about the customers who visited the mall.
+
+Table: Transactions
+
++----------------+---------+
+| Column Name    | Type    |
++----------------+---------+
+| transaction_id | int     |
+| visit_id       | int     |
+| amount         | int     |
++----------------+---------+
+transaction_id is column with unique values for this table.
+This table contains information about the transactions made during the visit_id.
+ 
+
+Write a solution to :
+
+1. find the IDs of the users who visited without making any transactions 
+2. and the number of times they made these types of visits.
+
+
+
+TRIALS:
+
+SELECT Visits.customer_id, Transactions.amount AS count_no_trans
+FROM Visits
+LEFT JOIN Transactions
+ON Visits.visit_id = Transactions.visit_id;
+
+(2)
+
+SELECT Visits.customer_id, Transactions.transaction_id AS count_no_trans
+FROM Visits
+JOIN Transactions
+ON Visits.visit_id = Transactions.visit_id;
+
 SOLUTION:
 
 LEARNING PROCESS:
 
-So this is only the draft of the join I am trying to do. Since when we do the join on two columns it seems that we also need to include
-the second column  with AND operator. 
-
-
+This is a bit challenging but I need to pay attantion to the details. I was just doing intuitivly and not thinking and breaking down the question.
+Continue from breaking down the question, please. 
 
 
 
