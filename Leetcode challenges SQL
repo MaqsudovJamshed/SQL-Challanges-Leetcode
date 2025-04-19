@@ -443,12 +443,73 @@ FROM Visits
 JOIN Transactions
 ON Visits.visit_id = Transactions.visit_id;
 
+Trial (3)
+You said:
+SELECT  Visits.customer_id, transactions.transaction_id, COUNT(*) AS count_no_trans
+FROM Visits
+left JOIN Transactions
+ON Visits.visit_id = Transactions.visit_id
+where transaction_id IS NULL ;
 SOLUTION:
+
+SELECT 
+  Visits.customer_id, 
+  COUNT(*) AS count_no_trans
+FROM Visits
+LEFT JOIN Transactions
+  ON Visits.visit_id = Transactions.visit_id
+WHERE Transactions.transaction_id IS NULL
+GROUP BY Visits.customer_id;
+
 
 LEARNING PROCESS:
 
-This is a bit challenging, but I need to pay attention to the details. I was just doing it intuitively, not thinking and breaking down the question.
-Continue from breaking down the question, please. 
+This is a bit challenging, but I must pay attention to the details. I was just doing it intuitively, not thinking and breaking down the question.
+Please continue breaking down the question. This one I tried many times, like 10 trials, but could not get the right answer
+Here you can see that in the trials there I did until there and gave for CHATGPT to correct me. My query was almost right.
+I did not consider several things: 
+  1. I don't need to repeat the transaction_id column, just with COUNT(*) clause , and at the end with WHERE clause I am already 
+filtering the rows. 
+2. I forgot to include the group by function ,why it is important, without group by we get the total number of people who entered with no
+tranactions, but with group by customer_id, we see who did not make transaction how many times per cutomer_id. 
+I don't know if I did the right thing by asking CHATGPT to help me with code, I dont know but anyway I am getting it. 
+
+
+
+
+
+
+
+
+
+
+8. 197. Rising Temperature
+Table: Weather
+
++---------------+---------+
+| Column Name   | Type    |
++---------------+---------+
+| id            | int     |
+| recordDate    | date    |
+| temperature   | int     |
++---------------+---------+
+id is the column with unique values for this table.
+There are no different rows with the same recordDate.
+This table contains information about the temperature on a certain day.
+ 
+
+Write a solution to find all dates' id with higher temperatures compared to its previous dates (yesterday).
+
+Return the result table in any order.
+
+The result format is in the following example.
+
+
+TRIALS: 
+
+SOLUTION:
+
+LEARNING PROCESS:
 
 
 
