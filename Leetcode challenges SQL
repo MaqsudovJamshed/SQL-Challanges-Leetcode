@@ -602,6 +602,21 @@ Return the result table in any order.
 
 TRIALS:
 
+WITH duration AS (
+  SELECT 
+    machine_id,
+    process_id,
+    activity_type,
+    MAX(CASE WHEN activity_type = 'end' THEN timestamp END) -
+    MIN(CASE WHEN activity_type = 'start' THEN timestamp END) AS total_duration
+    FROM Activity
+    GROUP BY machine_id, process_id, activity_type
+)
+SELECT DISTINCT
+machine_id,
+AVG(total_duration) AS processing_time
+FROM duration
+GROUP BY machine_id, process_id, activity_type;
 CODE SOLUTION: 
 
 LEARNING PROCESS:
