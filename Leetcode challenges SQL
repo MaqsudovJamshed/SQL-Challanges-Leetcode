@@ -617,9 +617,46 @@ machine_id,
 AVG(total_duration) AS processing_time
 FROM duration
 GROUP BY machine_id, process_id, activity_type;
+_______________________________________________________
+
 CODE SOLUTION: 
 
+WITH duration AS (
+  SELECT 
+    machine_id,
+    process_id,
+    activity_type,
+    MAX(CASE WHEN activity_type = 'end' THEN timestamp END) -
+    MIN(CASE WHEN activity_type = 'start' THEN timestamp END) AS total_duration
+    FROM Activity
+    GROUP BY machine_id, process_id
+)
+SELECT DISTINCT
+machine_id,
+ROUND(AVG(total_duration),3) AS processing_time
+FROM duration
+GROUP BY machine_id;
+
+
 LEARNING PROCESS:
+
+
+In this challenge, I used CTE, as I understood calculating the timestamp and other complex things we need, CTE, that's why
+I looked at Chatgpt to give me the syntax for the CTE. How can we calculate the total duration? So basically, we start writing the code
+with the opening WITH clause of the CTE, we name our temporary table, in our case is duration and then with write the AS keyword 
+and open the parenthesis, then we select our columns, with CASE WHEN we count the total duration by counting the max of end and min of start, 
+We are counting the exact max of end time because there might be many ends which are different in seconds or minutes, that's why where are 
+being accurate with that part. We group by machine_id and process_id. So one mistake I made was that I grouped by activity also, but it 
+seemed that. It was not necessary because we are counting the activity type and the duration, so we would not need this; otherwise, we would 
+get null values. 
+
+
+
+
+
+
+
+
 
 
 
