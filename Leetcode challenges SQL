@@ -653,6 +653,88 @@ get null values.
 
 
 
+________________
+
+
+
+
+10. 577. Employee Bonus
+
+Table: Employee
+
++-------------+---------+
+| Column Name | Type    |
++-------------+---------+
+| empId       | int     |
+| name        | varchar |
+| supervisor  | int     |
+| salary      | int     |
++-------------+---------+
+empId is the column with unique values for this table.
+Each row of this table indicates the name and the ID of an employee in addition to their salary and the id of their manager.
+
+Table: Bonus
+
++-------------+------+
+| Column Name | Type |
++-------------+------+
+| empId       | int  |
+| bonus       | int  |
++-------------+------+
+empId is the column of unique values for this table.
+empId is a foreign key (reference column) to empId from the Employee table.
+Each row of this table contains the id of an employee and their respective bonus.
+ 
+
+Write a solution to report the name and bonus amount of each employee with a bonus less than 1000.
+
+
+
+TRIALS:
+
+SELECT Employee.name, Bonus.bonus
+FROM Employee
+LEFT JOIN Bonus
+ON Employee.empID = Bonus.empID
+WHERE bonus < 1000;
+
+
+SOLUTION:
+
+(1)
+SELECT Employee.name, Bonus.bonus
+FROM Employee
+LEFT JOIN Bonus
+ON Employee.empID = Bonus.empID
+WHERE bonus IS NULL OR bonus < 1000;
+
+(2)
+
+WITH EmployeeBonus AS (
+    SELECT Employee.name, Bonus.bonus
+    FROM Employee
+    LEFT JOIN Bonus
+    ON Employee.empID = Bonus.empID
+)
+SELECT name, bonus
+FROM EmployeeBonus
+WHERE bonus IS NULL OR bonus < 1000;
+
+
+THOUGHTS:
+
+The challenge seemed very easy, I tried and solved it in 17 minutes, which I am proud of myself. One part of this problem that confused me
+was the filtering part with the condition where I filtered only one time but it seems that it is also we can filter two time with WHERE clause
+using OR operator to give the second condition. So what we do is basically write the WHERE clause and the column is for instance equal to 90
+OR the column is null also and thats is. So another option would be to make the full outer join but in MySQL it does not work we need to use
+UNION ALL for that. But I used this simple solution for it. Now I am curious if I can solve this with CTE. Here I got the CTE version also,
+but generally, as I see it, if the WHERE clause makes a clear filter that's fine. Let it be like that. No Neet to make it more complext with
+CTE. 
+
+
+11. 1280. Students and Examinations
+
+
 
 
 
