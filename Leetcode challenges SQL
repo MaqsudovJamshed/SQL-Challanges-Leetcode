@@ -767,19 +767,71 @@ SELECT
     ON Examinations.subject_name = Subjects.subject_name
     ORDER BY student_id, subject_name ASC;
 
+(3)
+
+SELECT
+Students.student_id,
+Students.student_name,
+Subjects.subject_name,
+Students.student_id AS attended_exams
+FROM Subjects
+LEFT JOIN  Examinations 
+ON Subjects.subject_name = Examinations.subject_name
+CROSS JOIN Students
+ON Students.student_id = Examinations.student_id
+GROUP BY Students.student_id, Subjects.subject_name
+ORDER BY Students.student_id, Subjects.subject_name;
+
 ________
 
-SELECT *
-FROM Students
-LEFT JOIN  Examinations 
-ON Students.student_id = Examinations.student_id; (CONTINUE YOUR PRACTICE WITH THIS CODE)
+
 
 SOLUTION:
 
+(1)
+
+SELECT
+Students.student_id,
+Students.student_name,
+Subjects.subject_name,
+COUNT(Examinations.subject_name) AS attended_exams
+FROM Students
+CROSS JOIN  Subjects 
+LEFT JOIN Examinations 
+    ON Students.student_id = Examinations.student_id
+    AND Subjects.subject_name = Examinations.subject_name
+GROUP BY Students.student_id, Subjects.subject_name
+ORDER BY Students.student_id, Subjects.subject_name;
+
+(2) With CTE
+
+WITH joined_tables AS (
+    SELECT
+        Students.student_id,
+        Students.student_name,
+        Examinations.subject_name
+    FROM Students
+    LEFT JOIN Examinations
+        ON Students.student_id = Examinations.student_id
+)
+SELECT
+    Students.student_id,
+    Students.student_name,
+    Subjects.subject_name,
+    COUNT(joined_tables.subject_name) AS attended_exams
+FROM Students
+CROSS JOIN Subjects
+LEFT JOIN joined_tables
+    ON Students.student_id = joined_tables.student_id
+    AND Subjects.subject_name = joined_tables.subject_name
+GROUP BY Students.student_id, Students.student_name, Subjects.subject_name
+ORDER BY Students.student_id, Students.student_name, Subjects.subject_name;
 
 
 
-THOUGHTS:
+
+THOUGHTS: 
+Very complex query in terms of conceptual understanding. 
 
 
 
