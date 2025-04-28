@@ -896,7 +896,49 @@ JOIN Managers M
 
 
 
-13. 
+13. 1934. Confirmation Rate 
+
+The confirmation rate of a user is the number of 'confirmed' messages divided by the total number of requested confirmation messages. 
+The confirmation rate of a user that did not request any confirmation messages is 0. Round the confirmation rate to two decimal places.
+
+Write a solution to find the confirmation rate of each user.
+
+Return the result table in any order.
+
+
+TRIALS:
+
+SOLUTION:
+
+WITH user_actions AS (
+SELECT
+    Signups.user_id,
+    Confirmations.action
+FROM Signups
+LEFT JOIN Confirmations
+    ON Signups.user_id = Confirmations.user_id
+),
+user_counts AS(
+SELECT
+    user_id,
+    COUNT(*) AS total_actions,
+    SUM(CASE WHEN action = "confirmed" THEN 1 ELSE 0 END) AS total_confirmed
+FROM user_actions
+GROUP BY user_id
+)
+
+SELECT
+    user_id,
+    ROUND((total_confirmed / total_actions),2) AS confirmation_rate
+    FROM user_counts
+    WHERE total_actions >0
+    GROUP BY user_id;
+
+
+THROUGHTS:
+
+
+Continue understanding this code tomorrow. 
 
 
 
