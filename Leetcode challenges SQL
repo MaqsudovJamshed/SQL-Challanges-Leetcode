@@ -938,10 +938,60 @@ SELECT
 THROUGHTS:
 
 
-Continue understanding this code tomorrow. 
 
 
 
+
+
+
+                                SECTION : Basic Aggregate Functions
+__________________________________________________________________________________________________________________________________
+
+
+
+620. Not Boring Movies
+
+Table: Cinema
+
++----------------+----------+
+| Column Name    | Type     |
++----------------+----------+
+| id             | int      |
+| movie          | varchar  |
+| description    | varchar  |
+| rating         | float    |
++----------------+----------+
+id is the primary key (column with unique values) for this table.
+Each row contains information about the name of a movie, its genre, and its rating.
+rating is a 2 decimal places float in the range [0, 10]
+ 
+
+Write a solution to report the movies with an 
+1. odd-numbered ID and a 
+2. Description that is not "boring".
+
+Return the result table ordered by rating in descending order.
+
+
+                                                TRIALS:
+
+SELECT *
+FROM Cinema
+WHERE id % 2 = 1 AND description != "boring"
+
+                                                  SOLUTION:
+
+SELECT *
+FROM Cinema
+WHERE id % 2 = 1 AND description != "boring"
+ORDER BY rating DESC;
+
+                                                  THOUGHTS:
+The SQL challenge was not difficult this time, I managed to do it fast. What I realized that it is important to understand the question
+well. In this context, first, I was asked to report the movies with an odd-numbered ID. So I looked it and find out that odd numbers are
+the numbers not divisible by 2 . So in sql to check that condition we use (%2=1), saying that I need odd number id like 1,3,5. Secondly,
+filtering the description part where is says it is not boring, in SQL is not equal (!=) eather exclamation mark and greater or less (<>).
+So yes I used the AND operator and filtered twice. Thats it. 
 
 
 
