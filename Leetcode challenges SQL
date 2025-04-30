@@ -949,6 +949,8 @@ ________________________________________________________________________________
 
 
 
+14. 
+
 620. Not Boring Movies
 
 Table: Cinema
@@ -993,6 +995,36 @@ the numbers not divisible by 2 . So in sql to check that condition we use (%2=1)
 filtering the description part where is says it is not boring, in SQL is not equal (!=) eather exclamation mark and greater or less (<>).
 So yes I used the AND operator and filtered twice. Thats it. 
 
+
+
+
+
+
+
+15.
+
+1251. Average Selling Price
+
+
+Write a solution to find the average selling price for each product. average_price should be rounded 
+to 2 decimal places. If a product does not have any sold units, its average selling price is assumed to be 0.
+
+Return the result table in any order.
+
+
+TRIALS:
+
+SELECT 
+    Prices.product_id,
+    SUM(Prices.price)/ SUM (UnitsSold.units) AS average_price
+FROM Prices 
+LEFT JOIN UnitsSold
+ON Prices.product_id = UnitsSold.product_id
+GROUP BY product_id;
+
+SOLUTION:
+
+THOUGHTS:
 
 
 
