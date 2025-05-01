@@ -1013,6 +1013,7 @@ Return the result table in any order.
 
 
 TRIALS:
+(1)
 
 SELECT 
     Prices.product_id,
@@ -1021,6 +1022,16 @@ FROM Prices
 LEFT JOIN UnitsSold
 ON Prices.product_id = UnitsSold.product_id
 GROUP BY product_id;
+
+(2)
+SELECT DISTINCT
+    Prices.product_id,
+    SUM(Prices.price)/ COUNT(UnitsSold.units) AS average_price
+FROM Prices 
+LEFT JOIN UnitsSold
+ON Prices.product_id = UnitsSold.product_id
+GROUP BY product_id
+
 
 SOLUTION:
 
