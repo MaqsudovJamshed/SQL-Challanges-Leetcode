@@ -1048,7 +1048,8 @@ AND us.purchase_date BETWEEN p.start_date AND p.end_date
 GROUP BY p.product_id;
 _______________________________________________________________________________
 
-THOUGHTS: now start with the basic of understanding and then think about the solution again . 
+THOUGHTS: now start with the basic of understanding and then think about the solution again. That is actually an interesting challenge it
+took me while to resolve it and come to it. 
 
 ____________
 
