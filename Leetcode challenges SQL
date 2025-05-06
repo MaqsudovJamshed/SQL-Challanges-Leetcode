@@ -1060,13 +1060,9 @@ sale's unit by its price like (100*5)
 by zero error". Thats actually another concept to understand how it works.
 
 
-4. Understand also this : 
-
-AND us.purchase_date BETWEEN p.start_date AND p.end_date ?????????
-
-
-
-With all these code above we using COALSCE function, it after the division when finding the NULL values and it turns them to 0. 
+4. Aslo it is important to understand on the top of our join we did a filter with time-based condition extending the join and joing
+our columns based on the purchase date between sart and end date. It is obviously a new concept for me but it is very common when analysing
+subscription period, promotions, and time based pricing. 
 
 
 
@@ -1084,6 +1080,72 @@ ____________
 Write an SQL query that reports the average experience years of all the employees for each project, rounded to 2 digits.
 
 Return the result table in any order.
+
+TRIALS:
+
+WITH project_employee AS (
+SELECT
+    Project.project_id,
+    Employee.employee_id,
+    Employee.name,
+    Employee.experience_years
+FROM Project
+LEFT JOIN Employee
+ON Project.employee_id = Employee.employee_id
+GROUP BY Project.project_id,Employee.employee_id
+)
+SELECT
+    project_id,
+    ROUND(AVG(experience_years),2) AS average_years
+FROM project_employee
+GROUP BY project_id;
+
+SOLUTION 
+
+                                 (1)
+
+WITH project_employee AS (
+SELECT
+    Project.project_id,
+    Employee.employee_id,
+    Employee.name,
+    Employee.experience_years
+FROM Project
+JOIN Employee
+ON Project.employee_id = Employee.employee_id
+)
+SELECT
+    project_id,
+    ROUND(AVG(experience_years),2) AS average_years
+FROM project_employee
+GROUP BY project_id;
+
+
+                                  (2)
+
+SELECT 
+    project_id,
+    ROUND(AVG(experience_years), 2) AS average_years
+FROM 
+    Project p
+JOIN 
+    Employee e
+ON 
+    p.employee_id = e.employee_id
+GROUP BY 
+    project_id
+
+THOUGHTS:
+
+The excercise was pretty intuitive. I have got it right. The only thing was it I did a mistake in the CTE is that I used the group by
+function, we always use group by with aggregation like sum, avg, or count . In the fist CTE there was no need to group by. 
+
+Also I did left join, actually. it was also completed with join . 
+
+So now what is the difference between left and inner join ?  Continue from here---------------
+
+
+
 
 
 
