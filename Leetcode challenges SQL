@@ -1049,11 +1049,21 @@ GROUP BY p.product_id;
 _______________________________________________________________________________
 
 THOUGHTS: now start with the basic of understanding and then think about the solution again. That is actually an interesting challenge it
-took me while to resolve it and come to it. 
+took me while to resolve it and come to it. We generally with the
+
+1. ROUND function rounding our average price to two decimal
+
+2. We sum how many units is sold by its price, for example product_id number 1 has sold 100 units for 5$ so what we de is multiply
+sale's unit by its price like (100*5)
+
+3. With NULLIF, we are saying that count the SUM of the units but if it is 0 turns the divisor into  NULL, so that to prevent "divizion 
+by zero error". Thats actually another concept to understand how it works.
+
+
+With all these code above we using COALSCE function, it after the division when finding the NULL values and it turns them to 0. 
+
 
 ____________
-
-
 
 1075. Project Employees I
 
