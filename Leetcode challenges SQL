@@ -1142,7 +1142,63 @@ function, we always use group by with aggregation like sum, avg, or count . In t
 
 Also I did left join, actually. it was also completed with join . 
 
-So now what is the difference between left and inner join ?  Continue from here---------------
+So now what is the difference between left and inner join ?
+_______________________________________________________
+      LEFT JOIN - returns all the rows from the left table plus matching rows from the right table (left is always when we use FROM clause),
+if there is not match in the right table, the result will show still in the left table row, but show nulls in the right table. 
+
+
+INNER JOIN - returns all the matching rows from the left and right tables , if a row in the left tables doesn not have matching rows from the 
+right table it will not appear in the result.
+
+NOTE : this is for me to refresh my memory. Now we can continue with the next challenge.
+
+
+
+_______________________
+
+
+    1633. Percentage of Users Attended a Contest
+
+
+Write a solution 
+
+1. to find the percentage of the users registered in each contest 
+2. rounded to two decimals.
+3. Return the result table ordered by percentage in descending order. 
+4. In case of a tie, order it by contest_id in ascending order.
+
+
+TRIALS
+
+(1)
+
+WITH registered AS(
+SELECT 
+    Register.user_id,
+    Register.contest_id,
+    COUNT(*) AS contest_count
+FROM Users
+JOIN Register
+ON Users.user_id = Register.user_id
+)
+SELECT
+    contest_id,
+    COUNT(*) * 100.0 / (SELECT COUNT(*) FROM registered) AS percentage
+FROM registered
+GROUP BY contest_id, user_id
+ORDER BY percentage DESC;
+
+
+
+THOUGHTS:
+
+This challenge is a bit difficult , I did try with my intuition like the fist think , like I did the previous excercise which worked,
+but this seems different. I need to fist understand how the percetage counting works in MYSQL . I need to study it fist and then
+try again to solve the problem. 
+
+Continue from understanding the percentage ????????????
+
 
 
 
