@@ -1,4 +1,4 @@
-This file is dedicated to the process of solving SQL challenges from the Leetcode. 
+eThis file is dedicated to the process of solving SQL challenges from the Leetcode. 
 
 
 
@@ -1189,14 +1189,49 @@ GROUP BY contest_id, user_id
 ORDER BY percentage DESC;
 
 
+SOLUTION:
+
+(1)
+
+WITH contest_users AS (
+    SELECT 
+        r.contest_id,
+        COUNT(DISTINCT r.user_id) AS user_count,
+        (SELECT COUNT(*) FROM Users) AS total_count
+    FROM Register r
+    GROUP BY r.contest_id
+)
+SELECT 
+    contest_id,
+    ROUND(user_count / total_count * 100, 2) AS percentage
+FROM contest_users
+ORDER BY percentage DESC, contest_id ASC;
+
+
+(2)
+
+SELECT 
+    r.contest_id,
+    ROUND(COUNT(DISTINCT r.user_id) / (SELECT COUNT(*) FROM Users) * 100, 2) AS percentage
+FROM Register r
+GROUP BY r.contest_id
+ORDER BY percentage DESC,
+r.contest_id ASC;
+
 
 THOUGHTS:
 
 This challenge is a bit difficult , I did try with my intuition like the fist think , like I did the previous excercise which worked,
 but this seems different. I need to fist understand how the percetage counting works in MYSQL . I need to study it fist and then
-try again to solve the problem. 
+try again to solve the problem. Need to come back again to this challenge. 
 
-Continue from understanding the percentage ????????????
+
+
+
+
+
+_______________
+
 
 
 
