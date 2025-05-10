@@ -1233,6 +1233,24 @@ try again to solve the problem. Need to come back again to this challenge.
 _______________
 
 
+1211. Queries Quality and Percentage
+
+
+Write a solution to find each query_name, the quality and poor_query_percentage.
+
+Both quality and poor_query_percentage should be rounded to 2 decimal places.
+
+Return the result table in any order.
+
+
+TRIALS:
+
+
+SOLUTION:
+
+
+THOUGHTS: It seems super difficult for me now. 
+
 
 
 
