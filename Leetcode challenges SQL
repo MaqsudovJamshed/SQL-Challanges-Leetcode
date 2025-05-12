@@ -1248,8 +1248,27 @@ TRIALS:
 
 SOLUTION:
 
+SELECT
+    query_name,
+    
+    ROUND(AVG(rating / position), 2) AS quality, 
+    ROUND(
+        COUNT(CASE WHEN rating < 3 THEN 1 END) / COUNT(*) * 100,
+        2
+    ) AS poor_query_percentage
+FROM 
+    Queries
 
-THOUGHTS: It seems super difficult for me now. 
+GROUP BY 
+    query_name;
+
+
+THOUGHTS: With this query we are analyzing search performence in system like : 
+- search engine, 
+- help center, 
+- e-commerce platform
+- internal knowledge base
+
 
 
 
