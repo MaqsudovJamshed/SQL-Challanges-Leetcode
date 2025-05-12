@@ -1,4 +1,4 @@
-eThis file is dedicated to the process of solving SQL challenges from the Leetcode. 
+This file is dedicated to the process of solving SQL challenges from the Leetcode. 
 
 
 
@@ -1245,12 +1245,12 @@ Return the result table in any order.
 
 TRIALS:
 
-
 SOLUTION:
+
+
 
 SELECT
     query_name,
-    
     ROUND(AVG(rating / position), 2) AS quality, 
     ROUND(
         COUNT(CASE WHEN rating < 3 THEN 1 END) / COUNT(*) * 100,
@@ -1262,15 +1262,49 @@ FROM
 GROUP BY 
     query_name;
 
-
-THOUGHTS: With this query we are analyzing search performence in system like : 
+THOUGHTS: 
+  
+    With this query we are analyzing search performence in system like : 
 - search engine, 
 - help center, 
 - e-commerce platform
 - internal knowledge base
+______________________________________________________________________________________
+
+1193. Monthly Transactions I
 
 
 
+
+Write an SQL query to find for each month and country, the number of transactions and their 
+total amount, the number of approved transactions and their total amount.
+
+SOLUTION: 
+
+SELECT
+    DATE_FORMAT(trans_date, '%Y-%m') AS month,
+    country,
+    COUNT(state) AS trans_count, 
+    COUNT(CASE WHEN state = "approved" THEN 1 END) AS approved_count,
+    SUM(amount)AS trans_total_amount,
+    SUM(CASE WHEN state = "approved" THEN amount ELSE 0 END ) AS approved_total_amount
+FROM 
+    Transactions
+GROUP BY 
+    month, country;
+
+
+
+___________________________________-
+
+
+
+1174. Immediate Food Delivery II
+
+
+
+
+Solution:
 
 
 
