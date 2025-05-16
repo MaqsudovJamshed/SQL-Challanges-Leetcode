@@ -1299,15 +1299,28 @@ ___________________________________-
 
 1174. Immediate Food Delivery II
 
+Trials: 
 
+WITH fist_orders AS(
+SELECT 
+    delivery_id,
+    customer_id,
+    order_date,
+    customer_pref_delivery_date,
+CASE 
+    WHEN customer_pref_delivery_date = order_date THEN 'first_order'
+    ELSE 'scheduled_date'
+ END AS immediate_order_status
+FROM Delivery
+)
+SELECT*
+FROM fist_orders;
 
 
 Solution:
 
 
-Thoughts : 
-
-so this part of the problemmm
+Thoughts : Continue from this part buidling the code, from the second part of it like building the percentage part. 
 
 
 
