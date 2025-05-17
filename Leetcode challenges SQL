@@ -1299,7 +1299,17 @@ ___________________________________-
 
 1174. Immediate Food Delivery II
 
-Trials: 
+1. If the customer's preferred delivery date is the same as the order date, then the order is called immediate; 
+otherwise, it is called scheduled.
+
+2. The first order of a customer is the order with the earliest order date that the customer made. 
+It is guaranteed that a customer has precisely one first order.
+
+3. Write a solution to find the percentage of immediate orders in the first orders of all customers, 
+rounded to 2 decimal places.
+
+_________________________________________
+                                         TRIAL (1)
 
 WITH fist_orders AS(
 SELECT 
@@ -1316,28 +1326,79 @@ FROM Delivery
 SELECT*
 FROM fist_orders;
 
+                                           TRIAL(2)
+
+WITH fist_orders AS(
+SELECT 
+    delivery_id,
+    customer_id,
+    order_date,
+    customer_pref_delivery_date,
+CASE 
+    WHEN customer_pref_delivery_date = order_date THEN 'immediate'
+    ELSE 'scheduled'
+ END AS immediate_order_status
+FROM Delivery
+ORDER BY immediate_order_status ASC
+)
+SELECT
+ROUND(SUM(DISTINCT immediate_order_status = 'immediate')/ COUNT(*) *100 ,2) AS immediate_percentage
+FROM fist_orders;
+
 
 Solution:
 
+WITH first_orders AS (
+    SELECT
+        delivery_id,
+        customer_id,
+        order_date,
+        customer_pref_delivery_date,
+        CASE 
+            WHEN customer_pref_delivery_date = order_date THEN 'immediate'
+            ELSE 'scheduled'
+        END AS immediate_order_status
+    FROM Delivery d
+    WHERE order_date = (
+        SELECT MIN(order_date)
+        FROM Delivery
+        WHERE customer_id = d.customer_id
+    )
+)
 
-Thoughts : Continue from this part buidling the code, from the second part of it like building the percentage part. 
+SELECT
+    ROUND(SUM(order_date = customer_pref_delivery_date) / COUNT(*) * 100, 2) AS immediate_percentage
+FROM first_orders;
 
 
+                                  Thoughts
+1. In this code we are using CTE to calculate the immediate first order percentage. I broke the excercise into several parts and tried to
+solve it. So the fist think I did was to use the CASE WHEN conditional logic to create a new column and classify the orders to imemdiate
+and scheduled orders ultimately trying to find the order status:
+
+CODE: 
+        CASE 
+            WHEN customer_pref_delivery_date = order_date THEN 'immediate'
+            ELSE 'scheduled'
+        END AS immediate_order_status
 
 
+2. In the second part of the code we are going to find the order that the customer made in partcular using customer_id. 
+In total we have 7 order and that 4 customers made these orders but the delivery was 7 time. The thing is we need to select only fist
+order of our customers. 
 
+ WHERE order_date = (
+        SELECT MIN(order_date)
+        FROM Delivery
+        WHERE customer_id = d.customer_id
 
+In this code we are using correlated subquery to filter only the first orders of our customers by using MIN function to filter fist orders,
+doing the inner join on customer_id, why on customer_id becuase the the same customer could have doine multiple orders but we only need the
+fist one in this excercise.
 
+3. So here in the 3rd part of our chellange we are summing the summing our immediate order and diving it by the total order. Meaning
+2/4*100. So it give us 2 which is 50%. 
 
-
-
-
-
-
-
-
-
-
-
-
-
+ ROUND(SUM(immediate_order_status = 'immediate') / COUNT(*) * 100, 2) AS immediate_percentage
+FROM first_orders;
+_____________________
