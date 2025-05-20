@@ -1415,6 +1415,8 @@ days starting from their first login date,
 
 2. then divide that number by the total number of players.
 
+
+
 Solution:
 
 WITH FirstLogin AS (
@@ -1442,10 +1444,34 @@ LEFT JOIN ConsecutiveLogin cl
 ON fl.player_id = cl.player_id;
 _______________________________________
  THOUGHTS
+  This consist of three part of CTE. In the first part we are finding the when the player  loged in fist, especially finding the date of
+of the players. 
 
-Try to understand this code ?
+  In the second part we are finding the consecutive login , meaning that which of the player loged in again, creating a a new
+temporary table like ConsecutiveLogin joining it with the FirstLogin on the player id and on an event date of the original one with the 
+first login date's date. with the interval of one day, so it give us the result.
+        
+  In the third part we are doing left join of the first login and consecutive login tables on player id, counting the consecutive login the 
+distinct player id mulpiplying by 1.0 to give us decimals and counting the distinct player id of fl. Meaning diving 1/3 = 33.33 . 
 
 
+_______________________________________________________
+
+                                                    Sorting and Grouping
+
+2356. Number of Unique Subjects Taught by Each Teacher
+
+Write a solution to calculate the number of unique subjects each teacher teaches in the university.
+
+TRIAL:
+
+SELECT DISTINCT 
+    teacher_id,
+    subject_id AS cnt
+FROM Teacher
+GROUP BY teacher_id;
+
+Solution:
 
 
 
