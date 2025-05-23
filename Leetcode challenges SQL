@@ -1457,9 +1457,13 @@ _______________________________________________________
 
                                                     Sorting and Grouping
 
-2356. Number of Unique Subjects Taught by Each Teacher
+2356.  
 
-Write a solution to calculate the number of unique subjects each teacher teaches in the university.
+Number of Unique Subjects Taught by Each Teacher
+
+Write a solution to 
+
+1. calculate the number of unique subjects each teacher teaches in the university.
 
 TRIAL:
 
@@ -1469,7 +1473,14 @@ SELECT DISTINCT
 FROM Teacher
 GROUP BY teacher_id;
 
+
 Solution:
+
+
+
+Thought process:
+
+
 
 
 
