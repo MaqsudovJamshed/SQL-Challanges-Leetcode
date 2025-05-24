@@ -711,7 +711,7 @@ WITH EmployeeBonus AS (
     SELECT Employee.name, Bonus.bonus
     FROM Employee
     LEFT JOIN Bonus
-    ON Employee.empID = Bonus.empID
+    ON Employee.empID = Bonus.empID   
 )
 SELECT name, bonus
 FROM EmployeeBonus
@@ -968,7 +968,7 @@ rating is a 2 decimal places float in the range [0, 10]
 Write a solution to report the movies with an 
 1. odd-numbered ID and a 
 2. Description that is not "boring".
-
+                                                                                                                                                                        
 Return the result table ordered by rating in descending order.
 
 
@@ -1476,23 +1476,28 @@ GROUP BY teacher_id;
 
 Solution:
 
+SELECT 
+    teacher_id,
+    COUNT(DISTINCT subject_id) AS cnt
+FROM Teacher
+GROUP BY teacher_id;
 
 
 Thought process:
 
+So basically we are grouping by id and counting the subject_id as cnt . 
 
 
+______________________________
 
 
+1141. User Activity for the Past 30 Days I
 
+Write a solution to 
 
-
-
-
-
-
-
-
+1. find the daily active user count 
+2. for a period of 30 days ending 2019-07-27 inclusively. 
+3. A user was active on someday if they made at least one activity on that day.
 
 
 
